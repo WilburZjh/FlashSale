@@ -9,6 +9,7 @@ target/
 mvnw
 mvnw.cmd
 src/main/resources/public/
+.DS_Store/
 
 ### STS ###
 .apt_generated
