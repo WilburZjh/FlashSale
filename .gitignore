@@ -9,7 +9,8 @@ target/
 mvnw
 mvnw.cmd
 src/main/resources/public/
-.DS_Store/
+src/main/resources/templates/
+.DS_Store
 
 ### STS ###
 .apt_generated
