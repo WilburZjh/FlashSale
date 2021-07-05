@@ -4,12 +4,14 @@ import com.zjh.flashsale.db.dao.FlashsaleActivityDao;
 import com.zjh.flashsale.db.dao.FlashsaleCommodityDao;
 import com.zjh.flashsale.db.po.FlashsaleActivity;
 import com.zjh.flashsale.db.po.FlashsaleCommodity;
+import com.zjh.flashsale.util.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +26,9 @@ public class FlashsaleActivityController {
     @Autowired
     private FlashsaleCommodityDao flashsaleCommodityDao;
 
+    @Resource
+    private RedisService redisService;
+
     /**
      * 查询秒杀活动的列表
      *
@@ -33,6 +38,14 @@ public class FlashsaleActivityController {
     @RequestMapping("/flashsales")
     public String sucessTest(Map<String, Object> resultMap) {
         List<FlashsaleActivity> flashsaleActivities = flashsaleActivityDao.queryFlashsaleActivitysByStatus(1);
+//        resultMap.put("flashsaleActivities", flashsaleActivities);
+//        return "flashsale_activity";
+        for (FlashsaleActivity flashsaleActivity : flashsaleActivities) {
+            redisService.setValue("stock:" + flashsaleActivity.getId(),
+                    (long) flashsaleActivity.getAvailableStock());
+
+            System.out.println(flashsaleActivity.getAvailableStock());
+        }
         resultMap.put("flashsaleActivities", flashsaleActivities);
         return "flashsale_activity";
     }
