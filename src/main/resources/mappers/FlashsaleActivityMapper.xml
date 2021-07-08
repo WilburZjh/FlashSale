@@ -167,4 +167,19 @@
     from flashsale_activity
     where activity_status = #{id,jdbcType=SMALLINT}
   </select>
+
+  <update id="deductStock" parameterType="java.lang.Long">
+        UPDATE flashsale_activity
+        SET lock_stock = lock_stock - 1
+        WHERE id = #{id,jdbcType=BIGINT}
+
+  </update>
+
+  <update id="lockStock" parameterType="java.lang.Long">
+    update flashsale_activity
+    set available_stock = available_stock - 1,
+        lock_stock = lock_stock + 1
+    where id = #{id,jdbcType=BIGINT}
+    and  available_stock > 0
+  </update>
 </mapper>

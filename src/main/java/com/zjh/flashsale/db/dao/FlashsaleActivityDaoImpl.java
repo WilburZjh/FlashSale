@@ -2,12 +2,13 @@ package com.zjh.flashsale.db.dao;
 
 import com.zjh.flashsale.db.mappers.FlashsaleActivityMapper;
 import com.zjh.flashsale.db.po.FlashsaleActivity;
-import com.zjh.flashsale.db.dao.FlashsaleActivityDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class FlashsaleActivityDaoImpl implements FlashsaleActivityDao {
 
@@ -32,5 +33,25 @@ public class FlashsaleActivityDaoImpl implements FlashsaleActivityDao {
     @Override
     public void updateFlashsaleActivity(FlashsaleActivity flashsaleActivity) {
         flashsaleActivityMapper.updateByPrimaryKey(flashsaleActivity);
+    }
+
+    @Override
+    public boolean deductStock(long activityId) {
+        int result = flashsaleActivityMapper.deductStock(activityId);
+        if (result < 1) {
+            log.error("扣减库存失败");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean lockStock(long activityId) {
+        int result = flashsaleActivityMapper.lockStock(activityId);
+        if (result < 1) {
+            log.error("锁定库存失败");
+            return false;
+        }
+        return true;
     }
 }
