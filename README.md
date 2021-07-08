@@ -11,6 +11,10 @@ Redis Lua is utilized to avoid the oversell problem and protect the DB(MySQL in 
 
 Get data from the MQ based on the number of requests that each machine can handle. Even if there are high volume of requests per second, it just puts the requests in the MQ, and the message of the message queue is controlled by the system itself, so that the entire system will not be collapsed.
 
+Utilized the delay message to shutdown the overtime order. 
+
+Implement the limited purchase function.
+
 JMeter is used to test the high volume of requests.
 
 This project is developed based on Spring Boot.
