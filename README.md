@@ -19,5 +19,3 @@ Implement the limited purchase function by `Redis` instead of DB querying.
 
 # Optimization
 1. `Content Delivery Network(CDN)`: reduce the rendering of web page.
-2. Transfer the dynamic resources to static resources.
-
