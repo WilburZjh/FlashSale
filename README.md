@@ -1,11 +1,14 @@
 # FlashSale
-This project is developed based on Spring Boot to stimulate the online flash sale services. This can be used in any online shopping website such as Shopify, Amazon, Loblaws, etc.
+This project is developed based on #Spring Boot 
+to stimulate the online flash sale services. This can be used in any online shopping website such as Shopify, Amazon, Loblaws, etc.
 
 In order to handle the high volume concurrency problem. SnowFlake algorithm is utilized to generated continuous ID.
 
-MyBatis is used to generated related ORM.
+#MyBatis 
+is used to generated related ORM.
 
-Redis, RocketMQ has been utilized.
+#Redis, RocketMQ 
+has been utilized.
 
 Redis Lua is utilized to avoid the oversell problem and protect the DB(MySQL in this case). RocketMQ is utilized to protect the server(Assume 1000 request per second, my server can only take 200 requests per second).
 
