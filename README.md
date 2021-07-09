@@ -13,7 +13,7 @@ Get data from the MQ based on the number of requests that each machine can handl
 
 In order to avoid using select function to retrieve data from millions of data stored in the DB, the delay message from RocketMQ is utilized to shutdown the overtime order. 
 
-Implement the limited purchase function.
+Implement the limited purchase function by Redis instead of DB querying.
 
 JMeter is used to test the high volume of requests.
 
