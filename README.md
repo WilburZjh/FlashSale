@@ -16,3 +16,6 @@ In order to avoid using select function to retrieve data from millions of data s
 Implement the limited purchase function by `Redis` instead of DB querying.
 
 `JMeter` is used to test the high volume of requests.
+
+# Optimization
+`CDN`: reduce the rendering of web page.
