@@ -19,3 +19,4 @@ Implement the limited purchase function by `Redis` instead of DB querying.
 
 # Optimization
 1. `Content Delivery Network(CDN)`: reduce the rendering of web page.
+2. Utilize `Thymeleaf` to transfer the dynamic webpage into static webpage. (developing)
