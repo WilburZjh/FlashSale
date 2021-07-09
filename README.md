@@ -18,4 +18,6 @@ Implement the limited purchase function by `Redis` instead of DB querying.
 `JMeter` is used to test the high volume of requests.
 
 # Optimization
-`Content Delivery Network(CDN)`: reduce the rendering of web page.
+1. `Content Delivery Network(CDN)`: reduce the rendering of web page.
+2. Transfer the dynamic resources to static resources.
+
