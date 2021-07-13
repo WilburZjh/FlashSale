@@ -25,4 +25,4 @@ Implement the limited purchase function by `Redis` instead of DB querying.
 4. Distributed Lock based on Redis -> update DB across different JVM. (set a method_name in DB as a unique field is too slow and the locking is highly depended on the efficiency of DB. Once the de-locking is failed, other thread/process can not access DB due to the locking record.)
 
 # Next stage
-Deploy in AWS.
+Deploy in a remote server, e.g. AWS
