@@ -1,4 +1,5 @@
 # FlashSale
+![plot](.flash-sale.png)
 This project is developed based on `Spring Boot` to stimulate the online flash sale services. This can be used in any online shopping website such as Shopify, Amazon, Loblaws, etc.
 
 In order to handle the high volume concurrency problem. SnowFlake algorithm is utilized to generated continuous ID.
