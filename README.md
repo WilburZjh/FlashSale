@@ -23,3 +23,6 @@ Implement the limited purchase function by `Redis` instead of DB querying.
 2. Utilize [`Sentinel`](https://github.com/alibaba/Sentinel) framework to ensure the stablility of FlashSale system. For example, restrict the request flow on multiple refreshing web page.
 3. Utilize `Thymeleaf` to transfer the dynamic webpage into static webpage to improve the user experience when sending request. (developing)
 4. Distributed Lock based on Redis -> update DB across different JVM. (set a method_name in DB as a unique field is too slow and the locking is highly depended on the efficiency of DB. Once the de-locking is failed, other thread/process can not access DB due to the locking record.)
+
+# Next stage
+Deploy in AWS.
