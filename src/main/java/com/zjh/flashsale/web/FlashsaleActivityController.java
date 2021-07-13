@@ -1,5 +1,8 @@
 package com.zjh.flashsale.web;
 
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.zjh.flashsale.db.dao.FlashsaleActivityDao;
 import com.zjh.flashsale.db.dao.FlashsaleCommodityDao;
 import com.zjh.flashsale.db.dao.OrderDao;
@@ -49,18 +52,23 @@ public class FlashsaleActivityController {
      * @return
      */
     @RequestMapping("/flashsales")
-    public String sucessTest(Map<String, Object> resultMap) {
-        List<FlashsaleActivity> flashsaleActivities = flashsaleActivityDao.queryFlashsaleActivitysByStatus(1);
-//        resultMap.put("flashsaleActivities", flashsaleActivities);
-//        return "flashsale_activity";
-        for (FlashsaleActivity flashsaleActivity : flashsaleActivities) {
-            redisService.setValue("stock:" + flashsaleActivity.getId(),
-                    (long) flashsaleActivity.getAvailableStock());
+    public String activityList(Map<String, Object> resultMap) {
+        try (Entry entry = SphU.entry("flashsales")) {
+            List<FlashsaleActivity> flashsaleActivities = flashsaleActivityDao.queryFlashsaleActivitysByStatus(1);
+            //        resultMap.put("flashsaleActivities", flashsaleActivities);
+            //        return "flashsale_activity";
+            for (FlashsaleActivity flashsaleActivity : flashsaleActivities) {
+                redisService.setValue("stock:" + flashsaleActivity.getId(),
+                        (long) flashsaleActivity.getAvailableStock());
 
-            System.out.println(flashsaleActivity.getAvailableStock());
+                System.out.println(flashsaleActivity.getAvailableStock());
+            }
+            resultMap.put("flashsaleActivities", flashsaleActivities);
+            return "flashsale_activity";
+        } catch (BlockException ex) {
+            log.error("查询秒杀活动列表被限流 " + ex.toString());
+            return "order_wait";
         }
-        resultMap.put("flashsaleActivities", flashsaleActivities);
-        return "flashsale_activity";
     }
 
     /**
