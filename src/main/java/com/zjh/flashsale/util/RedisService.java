@@ -35,7 +35,7 @@ public class RedisService {
     public boolean isInLimitMember(long activityId, long userId) {
         Jedis jedisClient = jedisPool.getResource();
         boolean sismember = jedisClient.sismember("flashsaleActivity_users:" + activityId, String.valueOf(userId));
-        log.info("userId:{}  activityId:{}  在已购名单中:{}", activityId, userId, sismember);
+        log.info("activityId:{} userId:{}  在已购名单中:{}", activityId, userId, sismember);
         return sismember;
     }
 

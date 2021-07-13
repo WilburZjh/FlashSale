@@ -23,5 +23,5 @@ public interface FlashsaleActivityMapper {
 
     int deductStock(Long id);
 
-    void revertStock(Long seckillActivityId);
+    void revertStock(Long flashsaleActivityId);
 }

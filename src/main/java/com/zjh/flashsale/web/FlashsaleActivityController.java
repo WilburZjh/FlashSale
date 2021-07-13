@@ -140,7 +140,7 @@ public class FlashsaleActivityController {
             if (redisService.isInLimitMember(flashsaleActivityId, userId)) {
                 //提示用户已经在限购名单中，返回结果
                 modelAndView.addObject("resultInfo", "对不起，您已经在限购名单中");
-                modelAndView.setViewName("seckill_result");
+                modelAndView.setViewName("flashsale_result");
                 return modelAndView;
             }
             /*
@@ -151,6 +151,8 @@ public class FlashsaleActivityController {
                 Order order = flashsaleActivityService.createOrder(flashsaleActivityId, userId);
                 modelAndView.addObject("resultInfo","秒杀成功，订单创建中，订单ID：" + order.getOrderNo());
                 modelAndView.addObject("orderNo",order.getOrderNo());
+
+                redisService.addLimitMember(flashsaleActivityId, userId);
             } else {
                 modelAndView.addObject("resultInfo","对不起，商品库存不足");
             }

@@ -56,7 +56,7 @@ public class FlashsaleActivityDaoImpl implements FlashsaleActivityDao {
     }
 
     @Override
-    public void revertStock(Long seckillActivityId) {
-        flashsaleActivityMapper.revertStock(seckillActivityId);
+    public void revertStock(Long flashsaleActivityId) {
+        flashsaleActivityMapper.revertStock(flashsaleActivityId);
     }
 }

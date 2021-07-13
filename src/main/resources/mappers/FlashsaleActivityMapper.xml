@@ -182,4 +182,11 @@
     where id = #{id,jdbcType=BIGINT}
     and  available_stock > 0
   </update>
+
+  <update id="revertStock" parameterType="java.lang.Long">
+    update flashsale_activity
+    set available_stock = available_stock + 1,
+        lock_stock = lock_stock - 1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>
