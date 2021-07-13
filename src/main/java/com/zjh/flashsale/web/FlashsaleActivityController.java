@@ -135,6 +135,15 @@ public class FlashsaleActivityController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             /*
+             * 判断用户是否在已购名单中
+             */
+            if (redisService.isInLimitMember(flashsaleActivityId, userId)) {
+                //提示用户已经在限购名单中，返回结果
+                modelAndView.addObject("resultInfo", "对不起，您已经在限购名单中");
+                modelAndView.setViewName("seckill_result");
+                return modelAndView;
+            }
+            /*
              * 确认是否能够进行秒杀
              */
             stockValidateResult = flashsaleActivityService.flashsaleStockValidator(flashsaleActivityId);
@@ -180,7 +189,7 @@ public class FlashsaleActivityController {
      * @return
      */
     @RequestMapping("/flashsale/payOrder/{orderNo}")
-    public String payOrder(@PathVariable String orderNo){
+    public String payOrder(@PathVariable String orderNo) throws Exception{
         flashsaleActivityService.payOrderProcess(orderNo);
         return "redirect:/flashsale/orderQuery/" + orderNo;
     }

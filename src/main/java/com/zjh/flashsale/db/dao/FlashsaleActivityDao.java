@@ -17,4 +17,6 @@ public interface FlashsaleActivityDao {
     public boolean deductStock(long activityId);
 
     public boolean lockStock(long activityId);
+
+    void revertStock(Long flashsaleActivityId);
 }
